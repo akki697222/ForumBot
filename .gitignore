@@ -8,6 +8,7 @@ target/
 .idea/jarRepositories.xml
 .idea/compiler.xml
 .idea/libraries/
+.idea
 *.iws
 *.iml
 *.ipr
@@ -32,6 +33,7 @@ build/
 !**/src/test/**/build/
 src/main/resources/config.properties
 threads.json
+logs
 
 ### VS Code ###
 .vscode/
