@@ -17,6 +17,10 @@ public class CreateThreadCommand implements SlashCommand {
     public void onCommand(SlashCommandInteractionEvent event) {
         String name = event.getOption("name").getAsString();
         String startMessage = event.getOption("message").getAsString();
+        if (ThreadInfomations.getThreadDatas().size() >= MAX_THREADS) {
+            event.reply("スレッドの最大数を超えています。使われていないスレッドを削除するか、管理者に連絡してください。").setEphemeral(true).queue();
+            return;
+        }
         event.getChannel().asTextChannel().createThreadChannel(name).queue(thread -> {
             ForumThreadData data = new ForumThreadData();
             List<ForumThread> threads = new ArrayList<>(ThreadInfomations.getThreadDatas());

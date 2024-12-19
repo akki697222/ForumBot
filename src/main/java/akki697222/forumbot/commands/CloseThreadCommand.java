@@ -26,7 +26,7 @@ public class CloseThreadCommand implements SlashCommand {
                 includesThisChannel = true;
             }
         }
-        if (!includesThisChannel) {
+        if (!includesThisChannel || channel.isArchived() || channel.isLocked()) {
             event.reply("このチャンネルは作成されたスレッドではない、またはすでに閉じられています。").setEphemeral(true).queue();
             return;
         }

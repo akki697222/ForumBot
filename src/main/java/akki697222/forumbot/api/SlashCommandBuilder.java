@@ -32,8 +32,8 @@ public class SlashCommandBuilder {
         return this;
     }
 
-    public SlashCommandBuilder addOption(String name, String description, OptionType type, boolean isRequired) {
-        this.options.add(new OptionData(type, name, description, isRequired));
+    public SlashCommandBuilder addOption(OptionData data) {
+        this.options.add(data);
         return this;
     }
 
@@ -41,9 +41,6 @@ public class SlashCommandBuilder {
         ForumBot.commands.put(this.name, this.command);
         SlashCommandData commandData = Commands.slash(this.name, this.description);
         commandData.addOptions(this.options);
-        jda.upsertCommand(commandData).queue(
-                success -> ForumBot.logger.info("Command successfully registered: {}", this.name),
-                error -> ForumBot.logger.error("Error while registering command", error)
-        );
+        jda.upsertCommand(commandData).queue();
     }
 }
